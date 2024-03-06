@@ -2,7 +2,7 @@ import css from './ContactForm.module.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { nanoid } from 'nanoid';
 import { useDispatch } from 'react-redux';
-import { addContact } from '../../redux/contactsSlice';
+import { addContact } from '../../redux/operations';
 
 import * as Yup from 'yup';
 
@@ -36,7 +36,6 @@ const ContactForm = () => {
       validationSchema={contactSchema}
       onSubmit={(value, action) => {
         pushContact({
-          id: Date.now(),
           ...value,
         });
         action.resetForm();
