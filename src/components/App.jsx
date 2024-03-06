@@ -5,6 +5,8 @@ import ContactList from './ContactList/ContactList';
 import SearchBox from './SearchBox/SearchBox';
 import ContactForm from './ContactForm/ContactForm';
 import Notification from './Notification/Notification';
+import Loader from './Loader/Loader';
+import ErrorMessage from './ErrorMessage/ErrorMessage';
 
 import {
   selectIsFilter,
@@ -34,16 +36,19 @@ function App() {
         <h1>Phonebook</h1>
         <ContactForm />
         <SearchBox />
-
-        {isContact ? (
-          isFilter ? (
-            <ContactList />
+        {isLoading && <Loader />}
+        {isError && <ErrorMessage />}
+        {!isLoading &&
+          !isError &&
+          (isContact ? (
+            isFilter ? (
+              <ContactList />
+            ) : (
+              <Notification type={'isFilter'} />
+            )
           ) : (
-            <Notification type={'isFilter'} />
-          )
-        ) : (
-          <Notification type={'isContact'} />
-        )}
+            <Notification type={'isContact'} />
+          ))}
       </div>
     </>
   );
